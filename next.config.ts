@@ -1,10 +1,9 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  output: "standalone",
   experimental: {
     serverActions: {
-      allowedOrigins: ["localhost:3000"],
+      allowedOrigins: ["localhost:3000", "fivepass.daksa.ia.br"],
     },
   },
 }
