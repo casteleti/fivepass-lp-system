@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id                    String    @id @default(cuid())
+
+  name                  String
+  email                 String    @unique
+  phone                 String?
+  company               String?
+
+  monthlyTicketsEstimate Int?
+  eventType             String?
+
+  source                String?
+  medium                String?
+  campaign              String?
+  term                  String?
+  content               String?
+  landingVariant        String?   @default("default")
+
+  ipAddress             String?
+  userAgent             String?
+
+  rdSyncedAt            DateTime?
+  whatsappClicked       Boolean   @default(false)
+  whatsappClickedAt     DateTime?
+
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  trackingEvents        TrackingEvent[]
+}
+
+model TrackingEvent {
+  id        String   @id @default(cuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  eventName String
+  eventData Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([leadId])
+  @@index([eventName])
+}
+
+model ApiLog {
+  id String @id @default(cuid())
+
+  method        String
+  endpoint      String
+  status        Int
+
+  requestBody   Json?
+  responseBody  Json?
+  errorMessage  String?
+
+  ipAddress     String?
+  userAgent     String?
+
+  duration      Int
+
+  createdAt     DateTime @default(now())
+
+  @@index([endpoint])
+  @@index([createdAt])
+}
