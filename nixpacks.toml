@@ -1,0 +1,8 @@
+[variables]
+NODE_ENV = "development"
+
+[phases.build]
+cmds = ["npm ci", "npm run build"]
+
+[phases.start]
+cmd = "npm start"
