@@ -1,8 +1,30 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { whatsappUrl } from "@/lib/whatsapp"
 
 export function Navbar() {
+  // sobre o hero (topo) vs. rolado (perto do bloco 2) — só muda o visual no mobile
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const hero = document.getElementById("hero")
+    const onScroll = () => {
+      const h = hero?.offsetHeight ?? window.innerHeight
+      setScrolled(window.scrollY > h * 0.6)
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+    }
+  }, [])
+
   return (
     <header
+      className={scrolled ? "site-nav nav-scrolled" : "site-nav nav-top"}
       style={{
         position: "fixed",
         top: 0,
@@ -14,6 +36,21 @@ export function Navbar() {
         borderBottom: "1px solid var(--border)",
       }}
     >
+      {/* Regras de transição mobile inline (não passam pelo processador de CSS) */}
+      <style>{`
+        .site-nav .nav-logo { height: 26px; width: auto; display: block; transition: height .35s ease; }
+        .site-nav .nav-cta {
+          opacity: 1; transform: none; pointer-events: auto;
+          transition: opacity .35s ease, transform .35s ease;
+        }
+        @media (max-width: 767px) {
+          .nav-top .nav-logo { height: 42px; }
+          .nav-top .nav-cta { opacity: 0; transform: translateX(10px); pointer-events: none; }
+          .nav-scrolled .nav-logo { height: 26px; }
+          .nav-scrolled .nav-cta { opacity: 1; transform: none; pointer-events: auto; }
+        }
+      `}</style>
+
       <div
         style={{
           maxWidth: "1100px",
@@ -22,17 +59,19 @@ export function Navbar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          minHeight: "42px",
         }}
       >
         <a href="#hero" aria-label="Fivepass — início" style={{ display: "inline-flex" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/fivepass-site-01.png" alt="Fivepass" width={132} height={29} style={{ height: "26px", width: "auto", display: "block" }} />
+          <img src="/fivepass-site-01.png" alt="Fivepass" width={132} height={29} className="nav-logo" />
         </a>
 
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
+          className="nav-cta"
           style={{
             padding: "10px 18px",
             background: "var(--accent)",

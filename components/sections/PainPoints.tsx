@@ -1,104 +1,37 @@
 const pains = [
-  {
-    icon: "💸",
-    title: "A taxa come a sua margem",
-    description:
-      "No marketplace você paga 10% a 15% por ingresso — e ainda repassa esse custo pro público. A margem que era do seu evento fica no caminho.",
-  },
-  {
-    icon: "⏳",
-    title: "Seu dinheiro fica preso",
-    description:
-      "A venda acontece, mas o dinheiro fica retido por dias na conta da plataforma. Caixa travado justo quando você precisa pagar a operação.",
-  },
-  {
-    icon: "🎭",
-    title: "A marca da plataforma que é divulgada",
-    description:
-      "O checkout tem a cara da plataforma, o concorrente aparece do lado e a experiência dilui o seu evento. Você fortalece a marca dos outros.",
-  },
-  {
-    icon: "📇",
-    title: "Seu cliente vira lead deles",
-    description:
-      "Quem comprou de você fica na base do marketplace, não na sua. Sem dados, sem CRM, sem remarketing — cada evento recomeça do zero.",
-  },
+  { t: "A taxa", d: "10% a 15% por ingresso, que ainda encarece o ingresso pro seu público." },
+  { t: "O seu dinheiro", d: "preso por semanas, travando seu caixa justo quando você mais precisa." },
+  { t: "A sua marca", d: "o checkout tem a cara dele, com o concorrente aparecendo do lado." },
+  { t: "O seu cliente", d: "vira lead dele. Sem dados, você recomeça do zero a cada evento." },
 ]
 
 export function PainPoints() {
   return (
-    <section id="problema" style={{ padding: "120px 24px", background: "var(--bg-dark)" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "72px" }}>
-          <p
-            style={{
-              color: "var(--accent)",
-              fontSize: "13px",
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              marginBottom: "16px",
-            }}
-          >
-            Aqui é onde vaza o LUCRO do produtor
-          </p>
-          <h2
-            style={{
-              fontSize: "clamp(28px, 4vw, 46px)",
-              fontWeight: 700,
-              color: "var(--text-primary)",
-              lineHeight: 1.15,
-              maxWidth: "760px",
-              margin: "0 auto",
-            }}
-          >
-            As maiores dores que dificultam PRODUTORES a lucrarem com eventos
+    <section id="problema" className="sec theme-black">
+      <div className="sec-in">
+        <div className="sec-head">
+          <span className="eyebrow">Onde vaza o seu lucro</span>
+          <h2 className="h2">
+            O marketplace não é seu parceiro. É seu <span style={{ color: "#ff5468" }}>sócio oculto</span>.
           </h2>
-          <p
-            style={{
-              fontSize: "17px",
-              color: "var(--text-secondary)",
-              lineHeight: 1.6,
-              maxWidth: "620px",
-              margin: "20px auto 0",
-            }}
-          >
-            Taxa alta, dinheiro retido, marca diluída e o cliente que é seu virando base de dados deles. O modelo
-            atual trabalha contra a sua operação.
+          <p className="lead" style={{ marginTop: 18 }}>
+            Entra em todo evento sem ser convidado e leva a parte mais cara:
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
-          {pains.map((pain) => (
-            <div
-              key={pain.title}
-              style={{
-                padding: "32px",
-                background: "var(--bg-darker)",
-                border: "1px solid var(--border)",
-                borderRadius: "10px",
-              }}
-            >
-              <div style={{ fontSize: "30px", marginBottom: "18px" }}>{pain.icon}</div>
-              <h3 style={{ fontSize: "17px", fontWeight: 600, color: "var(--text-primary)", marginBottom: "12px", lineHeight: 1.3 }}>
-                {pain.title}
-              </h3>
-              <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.7 }}>{pain.description}</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18 }}>
+          {pains.map((p) => (
+            <div key={p.t} className="card" style={{ padding: 26 }}>
+              <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                <span style={{ color: "#ff5468", fontSize: 20, fontWeight: 800, lineHeight: 1.1, flexShrink: 0 }}>✕</span>
+                <div>
+                  <h3 style={{ fontSize: 17, fontWeight: 700, color: "var(--sec-text)", marginBottom: 6 }}>{p.t}</h3>
+                  <p style={{ fontSize: 14, color: "var(--sec-text-2)", lineHeight: 1.6 }}>{p.d}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
-
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: "56px",
-            fontSize: "18px",
-            fontWeight: 600,
-            color: "var(--text-primary)",
-          }}
-        >
-          Dá pra vender ingresso sem entregar a sua operação.
-        </p>
       </div>
     </section>
   )

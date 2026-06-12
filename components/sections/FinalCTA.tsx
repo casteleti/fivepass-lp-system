@@ -4,57 +4,30 @@ export function FinalCTA() {
   return (
     <section
       id="cta"
+      className="sec theme-blue"
       style={{
-        padding: "120px 24px",
-        background: "radial-gradient(ellipse 100% 80% at 50% 100%, #1e3a5f55 0%, transparent 70%), var(--bg-dark)",
+        background:
+          "radial-gradient(ellipse 90% 80% at 50% 120%, rgba(0,217,255,.22) 0%, transparent 60%), linear-gradient(180deg, #0b2447, #0a1c38)",
       }}
     >
-      <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center" }}>
-        <h2
-          style={{
-            fontSize: "clamp(30px, 5vw, 52px)",
-            fontWeight: 800,
-            color: "var(--text-primary)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            marginBottom: "20px",
-          }}
-        >
-          Seu próximo evento pode dar <span style={{ color: "var(--accent)" }}>mais margem</span>.
+      <div className="sec-in" style={{ maxWidth: 680, textAlign: "center" }}>
+        <h2 className="h2">
+          Seu evento terminou. Seu dinheiro já está na <span className="accent">sua conta</span>.
         </h2>
 
-        <p style={{ fontSize: "18px", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "40px" }}>
-          Fale com a Fivepass no WhatsApp. A gente mostra a plataforma funcionando e calcula com você quanto a sua
-          operação economiza em taxa.
+        <p className="lead" style={{ marginTop: 20 }}>
+          Fale com a gente no WhatsApp. Mostramos a plataforma rodando e calculamos, na sua frente, quanto a sua
+          operação para de perder em taxa.
         </p>
 
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "10px",
-            padding: "18px 40px",
-            background: "var(--accent)",
-            color: "var(--bg-darker)",
-            borderRadius: "10px",
-            fontSize: "17px",
-            fontWeight: 700,
-            textDecoration: "none",
-            boxShadow: "0 0 32px #00d9ff44",
-          }}
-        >
-          Quero testar o sistema
-        </a>
+        <div style={{ marginTop: 32 }}>
+          <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={{ padding: "18px 40px", fontSize: 17 }}>
+            Quero testar o sistema
+          </a>
+        </div>
 
-        <p style={{ fontSize: "13px", color: "var(--text-tertiary)", marginTop: "20px" }}>
-          Sem compromisso. Atendimento humano que responde rápido.
-        </p>
-
-        <p style={{ fontSize: "17px", color: "var(--text-secondary)", marginTop: "56px", fontStyle: "italic" }}>
-          Seu evento terminou. Seu dinheiro já está na sua conta.
+        <p style={{ fontSize: 13, color: "var(--sec-text-3)", marginTop: 18 }}>
+          Sem compromisso. Atendimento humano, resposta rápida.
         </p>
       </div>
     </section>
