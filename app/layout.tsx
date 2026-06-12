@@ -6,8 +6,9 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Fivepass — Venda seus ingressos com autonomia total",
-  description: "A plataforma enterprise para promoters e organizadores que querem controle, dados e resultados sem depender de marketplaces.",
+  title: "Fivepass — A bilheteria que mais dá margem pro seu evento",
+  description:
+    "Bilheteria white-label com a menor taxa do mercado (3% a 5%), sua marca, seus dados e o dinheiro caindo direto na sua conta, na hora. Mais eventos. Menos taxas.",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

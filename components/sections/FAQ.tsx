@@ -4,57 +4,68 @@ import { useState } from "react"
 
 const faqs = [
   {
-    question: "Fivepass é um marketplace?",
-    answer: "Não. Fivepass é uma plataforma white-label — você vende com sua marca, seu domínio e fica com seus dados. Nenhum logo ou redirecionamento para outra plataforma.",
+    question: "Ninguém conhece a Fivepass. Meu cliente vai confiar?",
+    answer:
+      "Por ser white-label, o cliente compra na SUA marca, no seu domínio. A Fivepass é o motor invisível que garante a segurança por trás — o cliente confia em você, não numa plataforma estranha.",
   },
   {
-    question: "Como funciona a precificação?",
-    answer: "Cobramos uma taxa mensal fixa baseada no volume de eventos, não por ingresso vendido. Isso significa que quanto mais você vender, menor é o custo percentual.",
+    question: "Dá trabalho migrar de plataforma?",
+    answer:
+      "Migração assistida: a gente configura seus primeiros eventos e treina sua equipe. Transição sem estresse, no seu tempo.",
   },
   {
-    question: "Preciso de equipe técnica para implementar?",
-    answer: "Não. O onboarding é guiado e gerenciado pela nossa equipe. Em média, você está operacional em 48 horas após a contratação.",
+    question: "E se o sistema cair no pico de venda?",
+    answer:
+      "Infraestrutura em nuvem preparada para grandes volumes, com a mesma estabilidade dos gigantes. Já foi testada na operação real de centenas de grandes eventos.",
   },
   {
-    question: "Os dados dos compradores ficam comigo?",
-    answer: "100%. Todos os dados de compradores são seus — nome, e-mail, telefone, histórico de compras. Você pode exportar a qualquer momento e integrar com seu CRM.",
+    question: "O check-in é rápido? Tenho medo de fila.",
+    answer:
+      "Validação por QR Code e por catraca de reconhecimento facial — ágil e que funciona offline. Entrada fluida, sem fila, mesmo com milhares de pessoas.",
+  },
+  {
+    question: "Como funciona a taxa e o recebimento?",
+    answer:
+      "Taxa de 3% a 5% conforme o plano — uma das menores do mercado. E o dinheiro não passa pela nossa conta: cai direto na sua, na hora.",
+  },
+  {
+    question: "O checkout é seguro?",
+    answer:
+      "Criptografia de ponta e conformidade com a LGPD. As mesmas garantias de segurança dos maiores players do mercado.",
   },
   {
     question: "Funciona para eventos de qualquer porte?",
-    answer: "Sim. Nossos clientes vão de eventos com 200 pessoas a festivais com 40.000. A plataforma escala automaticamente.",
+    answer:
+      "Sim. Da primeira festa ao festival de 100 mil. A estrutura digital escala junto com o seu evento — você não precisa trocar de plataforma quando crescer.",
   },
   {
-    question: "E o suporte no dia do evento?",
-    answer: "Você tem um gerente de conta dedicado disponível durante o evento. Além disso, o app de portaria funciona offline para garantir check-in mesmo sem internet.",
-  },
-  {
-    question: "Posso migrar minha base de compradores atual?",
-    answer: "Sim. Oferecemos suporte completo de migração — importação de base, histórico de eventos e configuração das integrações existentes.",
-  },
-  {
-    question: "Quais formas de pagamento são aceitas?",
-    answer: "Cartão de crédito (parcelado), débito, PIX e boleto. Liquidação antecipada disponível para eventos de grande porte.",
+    question: "Já tenho uma taxa negociada por volume.",
+    answer:
+      "Vamos comparar na ponta do lápis. A economia em taxa somada ao ganho em marca e dados costuma superar o benefício que você tem hoje.",
   },
 ]
 
 export function FAQ() {
-  const [open, setOpen] = useState<number | null>(null)
+  const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section
-      id="faq"
-      style={{
-        padding: "120px 24px",
-        background: "var(--bg-darker)",
-      }}
-    >
+    <section id="faq" style={{ padding: "120px 24px", background: "var(--bg-darker)" }}>
       <div style={{ maxWidth: "720px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <p style={{ color: "var(--accent)", fontSize: "13px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "16px" }}>
-            Dúvidas frequentes
+        <div style={{ textAlign: "center", marginBottom: "56px" }}>
+          <p
+            style={{
+              color: "var(--accent)",
+              fontSize: "13px",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "16px",
+            }}
+          >
+            Perguntas frequentes
           </p>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.2 }}>
-            Perguntas que todo promoter faz
+          <h2 style={{ fontSize: "clamp(28px, 4vw, 46px)", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.15 }}>
+            As dúvidas que todo produtor faz antes de trocar.
           </h2>
         </div>
 
@@ -64,10 +75,10 @@ export function FAQ() {
               key={i}
               style={{
                 border: "1px solid",
-                borderColor: open === i ? "var(--primary-light)" : "var(--border)",
-                borderRadius: "8px",
+                borderColor: open === i ? "var(--accent)" : "var(--border)",
+                borderRadius: "10px",
                 overflow: "hidden",
-                transition: "border-color 300ms ease",
+                transition: "border-color 250ms ease",
               }}
             >
               <button
@@ -85,18 +96,19 @@ export function FAQ() {
                   textAlign: "left",
                   color: "var(--text-primary)",
                   fontSize: "15px",
-                  fontWeight: 500,
+                  fontWeight: 600,
                 }}
               >
                 <span>{faq.question}</span>
                 <span
                   style={{
                     color: "var(--accent)",
-                    fontSize: "20px",
+                    fontSize: "22px",
                     flexShrink: 0,
-                    transition: "transform 300ms ease",
+                    transition: "transform 250ms ease",
                     transform: open === i ? "rotate(45deg)" : "rotate(0deg)",
                     display: "inline-block",
+                    lineHeight: 1,
                   }}
                 >
                   +
@@ -109,7 +121,7 @@ export function FAQ() {
                     background: "var(--bg-dark)",
                     color: "var(--text-secondary)",
                     fontSize: "14px",
-                    lineHeight: 1.8,
+                    lineHeight: 1.75,
                     borderTop: "1px solid var(--border)",
                     paddingTop: "16px",
                   }}

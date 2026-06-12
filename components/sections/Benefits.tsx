@@ -1,59 +1,100 @@
-const benefits = [
-  { icon: "📈", title: "ROI imediato", description: "Economize até 15% em taxas por ingresso versus marketplaces. Para eventos com 1.000+ ingressos, o custo da plataforma se paga na primeira edição." },
-  { icon: "🎯", title: "Dados que convertem", description: "Cada comprador vira contato na sua base. E-mail, telefone, histórico de compras. Remarketing no próximo evento sem depender de mídia paga." },
-  { icon: "⚡", title: "Checkout de alta performance", description: "Página de compra otimizada para mobile, carregamento rápido e fluxo simplificado. Menos abandono de carrinho, mais vendas concluídas." },
-  { icon: "🔐", title: "Segurança e antifraude", description: "Gateway com tokenização, 3DS2, monitoramento de fraude em tempo real. Chargebacks reduzidos e transações protegidas." },
-  { icon: "📱", title: "Controle de acesso integrado", description: "App de portaria com leitura de QR. Validação offline disponível. Relatório de presença em tempo real durante o evento." },
-  { icon: "🔌", title: "Integrações nativas", description: "CRM, WhatsApp, e-mail marketing, plataformas de anúncio. Seu ecossistema de marketing conectado de ponta a ponta." },
+const rows = [
+  {
+    key: "Lucro",
+    before: "Taxa de 10% a 15% comendo a margem",
+    after: "Taxa de 3% a 5% — a menor do mercado",
+  },
+  {
+    key: "Caixa",
+    before: "Dinheiro retido por dias na conta da plataforma",
+    after: "Cai na hora, direto na sua conta",
+  },
+  {
+    key: "Marca",
+    before: "Checkout com a cara da plataforma",
+    after: "Ingresso, site e comunicação com a SUA marca",
+  },
+  {
+    key: "Dados",
+    before: "Seu cliente é lead do marketplace",
+    after: "Base 100% sua, pronta pra remarketing",
+  },
+  {
+    key: "Controle",
+    before: "Preço e regras ditados pela plataforma",
+    after: "Sua operação, suas decisões, do seu jeito",
+  },
 ]
 
 export function Benefits() {
   return (
-    <section
-      id="benefits"
-      style={{
-        padding: "120px 24px",
-        background: "var(--bg-darker)",
-      }}
-    >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "80px" }}>
-          <p style={{ color: "var(--accent)", fontSize: "13px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "16px" }}>
-            Benefícios concretos
+    <section id="benefits" style={{ padding: "120px 24px", background: "var(--bg-dark)" }}>
+      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <p
+            style={{
+              color: "var(--accent)",
+              fontSize: "13px",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "16px",
+            }}
+          >
+            O que muda
           </p>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.2 }}>
-            O que muda quando você tem controle
+          <h2
+            style={{
+              fontSize: "clamp(28px, 4vw, 46px)",
+              fontWeight: 700,
+              color: "var(--text-primary)",
+              lineHeight: 1.15,
+              maxWidth: "720px",
+              margin: "0 auto",
+            }}
+          >
+            Os 5 que o marketplace tira — e a Fivepass devolve.
           </h2>
+          <p style={{ fontSize: "17px", color: "var(--text-secondary)", lineHeight: 1.6, maxWidth: "560px", margin: "20px auto 0" }}>
+            Marca, dados, lucro, controle e cliente. Veja o antes e o depois.
+          </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
-          {benefits.map((benefit) => (
+        <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+          {rows.map((row) => (
             <div
-              key={benefit.title}
+              key={row.key}
               style={{
-                padding: "32px",
-                background: "var(--bg-dark)",
+                display: "grid",
+                gridTemplateColumns: "minmax(90px, 0.6fr) 1fr 1fr",
+                gap: "16px",
+                alignItems: "center",
+                padding: "20px 24px",
+                background: "var(--bg-darker)",
                 border: "1px solid var(--border)",
-                borderRadius: "8px",
-                display: "flex",
-                gap: "20px",
-                transition: "border-color 300ms ease",
+                borderRadius: "10px",
               }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.borderColor = "var(--primary-light)")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.borderColor = "var(--border)")}
             >
-              <div style={{ fontSize: "28px", flexShrink: 0 }}>{benefit.icon}</div>
-              <div>
-                <h3 style={{ fontSize: "16px", fontWeight: 600, color: "var(--text-primary)", marginBottom: "8px" }}>
-                  {benefit.title}
-                </h3>
-                <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.7 }}>
-                  {benefit.description}
-                </p>
+              <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--accent)" }}>{row.key}</div>
+
+              <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                <span style={{ color: "var(--error)", flexShrink: 0, fontWeight: 700 }}>✕</span>
+                <span style={{ fontSize: "14px", color: "var(--text-tertiary)", lineHeight: 1.5, textDecoration: "line-through", textDecorationColor: "#ef444466" }}>
+                  {row.before}
+                </span>
+              </div>
+
+              <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                <span style={{ color: "var(--success)", flexShrink: 0, fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: "14px", color: "var(--text-primary)", lineHeight: 1.5, fontWeight: 500 }}>{row.after}</span>
               </div>
             </div>
           ))}
         </div>
+
+        <p style={{ textAlign: "center", marginTop: "48px", fontSize: "18px", fontWeight: 600, color: "var(--text-primary)" }}>
+          Seu evento volta a ser inteiramente seu.
+        </p>
       </div>
     </section>
   )

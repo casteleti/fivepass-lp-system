@@ -1,92 +1,86 @@
 const cases = [
   {
-    category: "Shows e Festas",
-    title: "Eventos de entretenimento com 500 a 50.000 pessoas",
-    description: "Lotes com preço progressivo, controle de capacidade, integração com portal do fã e remarketing de recorrência.",
-    tags: ["Shows", "Festivais", "Festas corporativas"],
+    tag: "Começando",
+    title: "Primeiros eventos e produções pequenas",
+    description:
+      "Comece com a menor taxa do mercado e a sua marca desde o primeiro ingresso. Sem mensalidade de plataforma cara pra dar o primeiro passo.",
   },
   {
-    category: "Conferências e Congressos",
-    title: "Eventos B2B com gestão de credenciamento e networking",
-    description: "Múltiplos tipos de ingresso (VIP, standard, expositor), check-in inteligente, emissão de certificado integrada.",
-    tags: ["Congressos", "Summit", "Workshops"],
+    tag: "Em crescimento",
+    title: "Casas e produtores recorrentes",
+    description:
+      "Vários eventos por mês, tudo num lugar só. Dados pra fidelizar, remarketing pro próximo lote e operação que acompanha o seu ritmo.",
   },
   {
-    category: "Esportes e Arena",
-    title: "Eventos recorrentes que precisam fidelizar",
-    description: "Programas de fidelidade, plano de temporada, meia-entrada automatizada e integrações com sistemas de clube.",
-    tags: ["Futebol", "Lutas", "Corridas"],
-  },
-  {
-    category: "Cultura e Arte",
-    title: "Teatro, exposições e experiências premium",
-    description: "Checkout sofisticado condizente com o público, seleção de assento e voucher digital personalizado.",
-    tags: ["Teatro", "Exposições", "Musicais"],
+    tag: "Grandes eventos",
+    title: "Festivais, arenas e corporativo",
+    description:
+      "Alto volume, picos de venda e check-in crítico. Infraestrutura em nuvem que não falha no dia, com QR Code e catraca facial na portaria.",
   },
 ]
 
 export function UseCases() {
   return (
-    <section
-      id="use-cases"
-      style={{
-        padding: "120px 24px",
-        background: "var(--bg-dark)",
-      }}
-    >
+    <section id="use-cases" style={{ padding: "120px 24px", background: "var(--bg-dark)" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "80px" }}>
-          <p style={{ color: "var(--accent)", fontSize: "13px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "16px" }}>
-            Casos de uso
+        <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <p
+            style={{
+              color: "var(--accent)",
+              fontSize: "13px",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "16px",
+            }}
+          >
+            A plataforma que escala juntamente com os seus eventos
           </p>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.2 }}>
-            Para todo tipo de evento que leva a sério
+          <h2
+            style={{
+              fontSize: "clamp(28px, 4vw, 46px)",
+              fontWeight: 700,
+              color: "var(--text-primary)",
+              lineHeight: 1.15,
+              maxWidth: "780px",
+              margin: "0 auto",
+            }}
+          >
+            Seja uma festa com 300 pessoas, ou um mega evento com 10.000 participantes
           </h2>
+          <p style={{ fontSize: "17px", color: "var(--text-secondary)", lineHeight: 1.6, maxWidth: "640px", margin: "20px auto 0" }}>
+            Você não troca de plataforma quando o evento cresce — a Fivepass cresce junto. Mesma infraestrutura pra quem
+            está começando e pra quem lota arena.
+          </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
           {cases.map((c) => (
-            <div
-              key={c.category}
-              style={{
-                padding: "32px",
-                background: "var(--bg-darker)",
-                border: "1px solid var(--border)",
-                borderRadius: "8px",
-                transition: "border-color 300ms ease",
-              }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.borderColor = "var(--primary-light)")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.borderColor = "var(--border)")}
-            >
-              <p style={{ fontSize: "12px", color: "var(--accent)", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "12px" }}>
-                {c.category}
-              </p>
-              <h3 style={{ fontSize: "16px", fontWeight: 600, color: "var(--text-primary)", marginBottom: "12px", lineHeight: 1.4 }}>
-                {c.title}
-              </h3>
-              <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: "20px" }}>
-                {c.description}
-              </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                {c.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      padding: "4px 10px",
-                      background: "#1e3a5f33",
-                      border: "1px solid var(--primary)",
-                      borderRadius: "100px",
-                      fontSize: "11px",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+            <div key={c.tag} style={{ padding: "32px", background: "var(--bg-darker)", border: "1px solid var(--border)", borderRadius: "12px" }}>
+              <span
+                style={{
+                  display: "inline-block",
+                  padding: "4px 12px",
+                  background: "#00d9ff0a",
+                  border: "1px solid #00d9ff33",
+                  borderRadius: "100px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "var(--accent)",
+                  marginBottom: "18px",
+                }}
+              >
+                {c.tag}
+              </span>
+              <h3 style={{ fontSize: "18px", fontWeight: 600, color: "var(--text-primary)", marginBottom: "12px", lineHeight: 1.3 }}>{c.title}</h3>
+              <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.7 }}>{c.description}</p>
             </div>
           ))}
         </div>
+
+        <p style={{ textAlign: "center", marginTop: "56px", fontSize: "18px", fontWeight: 600, color: "var(--text-primary)" }}>
+          Sem teto. Sem trocar de plataforma. A operação escala com o seu evento.
+        </p>
       </div>
     </section>
   )

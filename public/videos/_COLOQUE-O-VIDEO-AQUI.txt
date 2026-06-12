@@ -1,0 +1,7 @@
+Solte aqui o depoimento em vídeo (vertical 9:16):
+
+  public/videos/depoimento.mp4            (obrigatório)
+  public/videos/depoimento-poster.jpg     (opcional — imagem de capa antes do play)
+
+O bloco 05 ("Prova real") já aponta pra esses caminhos.
+Formato recomendado: MP4 (H.264 + AAC), vertical 1080x1920.

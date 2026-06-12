@@ -1,42 +1,30 @@
-"use client"
+import { whatsappUrl } from "@/lib/whatsapp"
 
-import { useState } from "react"
+const proofs = [
+  "3% a 5% de taxa",
+  "Dinheiro na hora, na sua conta",
+  "Sua marca, seu domínio",
+  "Testado por centenas de grandes eventos",
+]
 
-interface HeroProps {
-  onCtaClick?: () => void
-}
-
-export function Hero({ onCtaClick }: HeroProps) {
+export function Hero() {
   return (
     <section
       id="hero"
       style={{
         minHeight: "100vh",
-        background: `radial-gradient(ellipse 80% 60% at 50% 0%, #1e3a5f33 0%, transparent 70%), var(--bg-darker)`,
+        background:
+          "radial-gradient(ellipse 80% 60% at 50% 0%, #1e3a5f33 0%, transparent 70%), var(--bg-darker)",
         display: "flex",
         alignItems: "center",
-        padding: "80px 24px",
+        padding: "120px 24px 80px",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Glow background */}
-      <div
-        style={{
-          position: "absolute",
-          top: "20%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "600px",
-          height: "600px",
-          background: "radial-gradient(circle, #00d9ff0a 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div style={{ maxWidth: "1100px", margin: "0 auto", width: "100%", position: "relative" }}>
-        {/* Badge */}
-        <div style={{ marginBottom: "32px" }}>
+      <div style={{ maxWidth: "1000px", margin: "0 auto", width: "100%", position: "relative" }}>
+        {/* Eyebrow — âncora de categoria (marca ainda desconhecida) */}
+        <div style={{ marginBottom: "28px" }}>
           <span
             style={{
               display: "inline-flex",
@@ -52,68 +40,60 @@ export function Hero({ onCtaClick }: HeroProps) {
               letterSpacing: "0.02em",
             }}
           >
-            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent)", display: "inline-block" }} />
-            Plataforma enterprise de bilheteria
+            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent)" }} />
+            Plataforma de ticketing white-label
           </span>
         </div>
 
-        {/* Headline */}
+        {/* H1 — V4: claim de categoria + margem */}
         <h1
           style={{
-            fontSize: "clamp(40px, 6vw, 72px)",
+            fontSize: "clamp(38px, 6vw, 68px)",
             fontWeight: 700,
-            lineHeight: 1.1,
+            lineHeight: 1.08,
             letterSpacing: "-0.02em",
             color: "var(--text-primary)",
             marginBottom: "24px",
-            maxWidth: "800px",
+            maxWidth: "880px",
           }}
         >
-          Venda seus ingressos com{" "}
-          <span style={{ color: "var(--accent)" }}>autonomia total</span>
+          A bilheteria que mais dá <span style={{ color: "var(--accent)" }}>margem</span> pro produtor de eventos.
         </h1>
 
-        {/* Subheadline */}
+        {/* Subheadline — mecanismo + prova */}
         <p
           style={{
             fontSize: "clamp(16px, 2vw, 20px)",
             color: "var(--text-secondary)",
-            lineHeight: 1.7,
-            marginBottom: "48px",
-            maxWidth: "600px",
+            lineHeight: 1.6,
+            marginBottom: "40px",
+            maxWidth: "620px",
           }}
         >
-          A plataforma white-label para promoters e organizadores que querem controle
-          sobre dados, marca e receita — sem depender de marketplaces.
+          Menor taxa do mercado (<strong style={{ color: "var(--text-primary)" }}>3% a 5%</strong>), tudo com a{" "}
+          <strong style={{ color: "var(--text-primary)" }}>sua marca</strong> e o dinheiro caindo direto na sua
+          conta, <strong style={{ color: "var(--text-primary)" }}>na hora</strong>. Seu evento vende, sua margem cresce.
         </p>
 
         {/* CTAs */}
         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
-          <button
-            onClick={onCtaClick}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               padding: "16px 32px",
               background: "var(--accent)",
               color: "var(--bg-darker)",
-              border: "none",
               borderRadius: "8px",
               fontSize: "16px",
-              fontWeight: 600,
-              cursor: "pointer",
-              transition: "all 300ms ease",
+              fontWeight: 700,
+              textDecoration: "none",
               boxShadow: "0 0 24px #00d9ff33",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0 0 40px #00d9ff55"
-              e.currentTarget.style.transform = "translateY(-1px)"
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "0 0 24px #00d9ff33"
-              e.currentTarget.style.transform = "translateY(0)"
-            }}
           >
-            Quero uma demonstração
-          </button>
+            Quero testar o sistema
+          </a>
           <a
             href="#how-it-works"
             style={{
@@ -124,37 +104,19 @@ export function Hero({ onCtaClick }: HeroProps) {
               borderRadius: "8px",
               fontSize: "16px",
               fontWeight: 500,
-              cursor: "pointer",
               textDecoration: "none",
-              transition: "all 300ms ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "var(--accent)"
-              e.currentTarget.style.color = "var(--text-primary)"
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "var(--border)"
-              e.currentTarget.style.color = "var(--text-secondary)"
             }}
           >
-            Como funciona →
+            Como funciona ↓
           </a>
         </div>
 
-        {/* Social proof micro */}
-        <div style={{ marginTop: "64px", display: "flex", gap: "48px", flexWrap: "wrap" }}>
-          {[
-            { value: "+500k", label: "Ingressos vendidos" },
-            { value: "98%", label: "Uptime garantido" },
-            { value: "3x", label: "Receita vs marketplace" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <div style={{ fontSize: "28px", fontWeight: 700, color: "var(--accent)", lineHeight: 1 }}>
-                {stat.value}
-              </div>
-              <div style={{ fontSize: "13px", color: "var(--text-tertiary)", marginTop: "4px" }}>
-                {stat.label}
-              </div>
+        {/* Faixa de micro-prova */}
+        <div style={{ marginTop: "56px", display: "flex", gap: "12px 28px", flexWrap: "wrap" }}>
+          {proofs.map((p) => (
+            <div key={p} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ color: "var(--success)", fontSize: "15px", fontWeight: 700 }}>✓</span>
+              <span style={{ fontSize: "13px", color: "var(--text-tertiary)" }}>{p}</span>
             </div>
           ))}
         </div>
