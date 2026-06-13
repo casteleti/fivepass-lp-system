@@ -19,7 +19,6 @@ const PHRASES: Tok[][] = [
 
 const plain = (toks: Tok[]) => toks.map((x) => x.t).join("")
 const len = (toks: Tok[]) => plain(toks).length
-const LONGEST = PHRASES.reduce((a, b) => (len(b) > len(a) ? b : a), PHRASES[0])
 const ARIA = `${PREFIX} ${plain(PHRASES[0]).replace(/\n/g, " ")}`
 
 const TYPE_MS = 50
@@ -115,14 +114,10 @@ export function TypewriterHeadline() {
       <h1 aria-label={ARIA} style={h1Style}>
       <span style={{ display: "block" }}>
         <span>O Fivepass é </span>
-        <span className="prefix-line2">para produtor que</span>
+        <span className="prefix-line2">para produtor que{" "}</span>
       </span>
-      <span style={{ display: "block", position: "relative", marginTop: 8 }}>
-        {/* sizer invisível: reserva as 2 linhas (sem pulo de layout) */}
-        <span aria-hidden="true" style={{ visibility: "hidden", display: "block" }}>
-          {render(LONGEST, len(LONGEST))}
-        </span>
-        {/* linha que gira (animada) */}
+      <span style={{ display: "block", position: "relative", marginTop: 8, minHeight: "2.32em" }}>
+        {/* linha que gira (animada) — altura reservada via min-height (2 linhas), sem texto-sizer poluindo o H1 */}
         <span aria-hidden="true" style={{ position: "absolute", left: 0, top: 0, right: 0 }}>
           {render(PHRASES[pi], n)}
           <span className="tw-caret">|</span>

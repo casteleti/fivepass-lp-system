@@ -19,7 +19,8 @@ export function Hero() {
       }}
     >
       <div className="sec-in" style={{ position: "relative" }}>
-        <span className="eyebrow" style={{ whiteSpace: "nowrap" }}>Plataforma de Ingressos para Eventos</span>
+        <style>{`@media (min-width: 768px) { .eyebrow-hero { font-size: 22px; letter-spacing: .06em; } }`}</style>
+        <span className="eyebrow eyebrow-hero" style={{ whiteSpace: "nowrap" }}>Plataforma de Ingressos para Eventos</span>
 
         <TypewriterHeadline />
 

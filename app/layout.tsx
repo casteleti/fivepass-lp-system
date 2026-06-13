@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono, Saira_Condensed } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
@@ -11,10 +11,57 @@ const sairaCondensed = Saira_Condensed({ variable: "--font-condensed", subsets: 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-MTSFXTQ5"
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || "G-VGGKMRYFRG"
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fivepass.daksa.ia.br"
+const TITLE = "Fivepass — A bilheteria que mais dá margem pro seu evento"
+const DESCRIPTION =
+  "Bilheteria white-label com a menor taxa do mercado (3% a 5%), sua marca, seus dados e o dinheiro caindo direto na sua conta, na hora. Mais eventos. Menos taxas."
+
 export const metadata: Metadata = {
-  title: "Fivepass — A bilheteria que mais dá margem pro seu evento",
-  description:
-    "Bilheteria white-label com a menor taxa do mercado (3% a 5%), sua marca, seus dados e o dinheiro caindo direto na sua conta, na hora. Mais eventos. Menos taxas.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  applicationName: "Fivepass",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Fivepass",
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: "pt_BR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#07090e",
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Fivepass",
+      url: SITE_URL,
+      logo: `${SITE_URL}/fivepass-site-01.png`,
+      description: DESCRIPTION,
+      sameAs: ["https://www.instagram.com/five.pass/"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Fivepass",
+      inLanguage: "pt-BR",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -30,6 +77,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+
+        {/* Dados estruturados (JSON-LD) */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         {children}
 
