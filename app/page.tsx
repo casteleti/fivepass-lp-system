@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/ui/Navbar"
 import { Footer } from "@/components/ui/Footer"
 import { StickyCtaMobile } from "@/components/ui/StickyCtaMobile"
+import { Quiz } from "@/components/ui/Quiz"
 import { Hero } from "@/components/sections/Hero"
 import { Loss } from "@/components/sections/Loss"
 import { PainPoints } from "@/components/sections/PainPoints"
@@ -30,6 +31,7 @@ export default function Home() {
       </main>
       <Footer />
       <StickyCtaMobile />
+      <Quiz />
     </>
   )
 }

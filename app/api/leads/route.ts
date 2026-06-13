@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/db"
 import { leadSchema } from "@/lib/validations/lead"
 import { logApi } from "@/lib/api-logger"
+import { sendRdConversion } from "@/lib/rd"
 
 export async function POST(req: NextRequest) {
   const start = Date.now()
@@ -46,6 +47,16 @@ export async function POST(req: NextRequest) {
           },
         },
       },
+    })
+
+    // Envia a conversão pro RD Station (best-effort — não derruba o lead se o RD falhar)
+    await sendRdConversion({
+      email: parsed.data.email,
+      name: parsed.data.name,
+      mobilePhone: parsed.data.phone,
+      eventType: parsed.data.eventType,
+      volume: parsed.data.monthlyTicketsEstimate,
+      dor: (body as { dor?: string })?.dor,
     })
 
     const response = { success: true, leadId: lead.id, redirectUrl: `/thank-you?leadId=${lead.id}` }
