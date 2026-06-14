@@ -47,12 +47,9 @@ const STEPS: Step[] = [
 ]
 
 const TOTAL = STEPS.length + 1 // + etapa de contato
-const EVENT_LABEL: Record<string, string> = {
-  show: "shows/festivais",
-  festa: "festas",
-  conferencia: "conferências",
-  outro: "eventos",
-}
+// Mensagem pronta que abre no WhatsApp ao concluir o quiz (o cliente só envia)
+const WA_MSG = "Olá, acabo de responder o formulário. Quero saber mais sobre o Fivepass."
+const WA_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WA_MSG)}`
 
 function push(event: string, extra: Record<string, unknown> = {}) {
   if (typeof window !== "undefined") window.dataLayer?.push({ event, ...extra })
@@ -128,6 +125,10 @@ export function Quiz() {
       }
       push("lead_quiz_complete", { eventType: answers.eventType, volume: answers.volume, dor: answers.dor })
       setStatus("success")
+      // Abre o WhatsApp com a mensagem pronta. Navegação direta = confiável no mobile (não é bloqueada como popup).
+      window.setTimeout(() => {
+        window.location.href = WA_URL
+      }, 900)
     } catch {
       setStatus("error")
       setErr("Falha de conexão. Tente de novo.")
@@ -136,8 +137,6 @@ export function Quiz() {
 
   const isContact = step === STEPS.length
   const progress = status === "success" ? 100 : Math.round(((step + 0.5) / TOTAL) * 100)
-  const waMsg = `Olá! Fiz o diagnóstico no site da Fivepass. Produzo ${EVENT_LABEL[String(answers.eventType)] || "eventos"} e quero testar o sistema.`
-  const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(waMsg)}`
 
   return (
     <div
@@ -197,12 +196,12 @@ export function Quiz() {
           {status === "success" ? (
             <div className="quiz-step" style={{ textAlign: "center" }}>
               <div style={{ fontSize: 56, marginBottom: 14 }}>🎉</div>
-              <h2 style={{ fontSize: "clamp(26px,7vw,34px)", fontWeight: 800, lineHeight: 1.15 }}>Recebemos o seu diagnóstico!</h2>
+              <h2 style={{ fontSize: "clamp(26px,7vw,34px)", fontWeight: 800, lineHeight: 1.15 }}>Recebemos!</h2>
               <p style={{ fontSize: 16, color: "#bcceea", lineHeight: 1.6, marginTop: 14 }}>
-                Nossa equipe vai te chamar no WhatsApp pra mostrar, na ponta do lápis, <strong style={{ color: "#fff" }}>quanto você economiza</strong> com a Fivepass.
+                Estamos abrindo o WhatsApp pra você <strong style={{ color: "#fff" }}>só enviar a mensagem</strong> e falar com a gente.
               </p>
-              <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ ...primaryBtn, marginTop: 28 }}>
-                Falar agora no WhatsApp
+              <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ ...primaryBtn, marginTop: 28 }}>
+                Abrir o WhatsApp
               </a>
               <button onClick={() => setOpen(false)} style={{ ...textBtn, marginTop: 14 }}>
                 Fechar
