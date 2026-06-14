@@ -13,7 +13,7 @@ export function SocialProof() {
       <div className="sec-in">
         <div className="sec-head">
           <span className="eyebrow">Prova real</span>
-          <h2 className="h2">+1.000 pessoas entrando. A Fivepass segurando a portaria.</h2>
+          <h2 className="h2">+12.000 pessoas entrando. A Fivepass segurando a portaria.</h2>
           <p className="lead" style={{ marginTop: 18 }}>
             Não é simulação nem render bonitinho. É um produtor mostrando a fila do evento dele entrar — QR e catraca
             facial validando em tempo real, sem travar.

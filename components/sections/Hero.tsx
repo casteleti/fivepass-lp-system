@@ -37,7 +37,8 @@ export function Hero() {
           position: "absolute",
           inset: 0,
           zIndex: 1,
-          background: "linear-gradient(to bottom, rgba(7,9,14,.74) 0%, rgba(7,9,14,.6) 42%, rgba(7,9,14,.92) 100%)",
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,.62) 0%, rgba(0,0,0,.58) 38%, rgba(4,6,11,.96) 100%)",
         }}
       />
 

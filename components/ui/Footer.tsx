@@ -8,9 +8,9 @@ export function Footer() {
         <img
           src="/fivepass-site-01.png"
           alt="Fivepass"
-          width={150}
-          height={33}
-          style={{ height: "28px", width: "auto", margin: "0 auto 16px" }}
+          width={184}
+          height={40}
+          style={{ height: "28px", width: "auto", objectFit: "contain", margin: "0 auto 16px" }}
         />
         <p style={{ color: "var(--text-secondary)", fontSize: "14px", marginBottom: "20px" }}>
           Mais eventos. Menos taxas.

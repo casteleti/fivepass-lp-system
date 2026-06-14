@@ -38,16 +38,16 @@ export function Navbar() {
     >
       {/* Regras de transição mobile inline (não passam pelo processador de CSS) */}
       <style>{`
-        .site-nav .nav-logo { height: 26px; width: auto; display: block; transition: height .35s ease; }
+        .site-nav .nav-logo { height: 26px; width: auto; aspect-ratio: 800 / 174; display: block; object-fit: contain; transition: height .35s ease; }
         .site-nav .nav-cta {
           opacity: 1; transform: none; pointer-events: auto;
           transition: opacity .35s ease, transform .35s ease;
         }
         @media (max-width: 767px) {
           .nav-top .nav-logo { height: 42px; }
-          .nav-top .nav-cta { opacity: 0; transform: translateX(10px); pointer-events: none; }
+          .nav-top .nav-cta { display: none; }
           .nav-scrolled .nav-logo { height: 26px; }
-          .nav-scrolled .nav-cta { opacity: 1; transform: none; pointer-events: auto; }
+          .nav-scrolled .nav-cta { display: inline-flex; opacity: 1; transform: none; pointer-events: auto; }
         }
       `}</style>
 
@@ -64,7 +64,7 @@ export function Navbar() {
       >
         <a href="#hero" aria-label="Fivepass — início" style={{ display: "inline-flex" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/fivepass-site-01.png" alt="Fivepass" width={132} height={29} className="nav-logo" />
+          <img src="/fivepass-site-01.png" alt="Fivepass" width={184} height={40} className="nav-logo" />
         </a>
 
         <a
