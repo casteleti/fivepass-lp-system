@@ -25,7 +25,7 @@ export function Loss() {
 
         <div style={{ marginTop: 34 }}>
           <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero parar de perder isso
+            Quero parar de perder dinheiro
           </a>
         </div>
       </div>

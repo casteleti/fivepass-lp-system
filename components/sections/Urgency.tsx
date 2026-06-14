@@ -17,7 +17,7 @@ export function Urgency() {
 
         <div style={{ marginTop: 32 }}>
           <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero testar o sistema
+            Quero começar pelo próximo evento
           </a>
         </div>
       </div>

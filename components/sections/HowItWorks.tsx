@@ -34,7 +34,7 @@ export function HowItWorks() {
 
         <div style={{ textAlign: "center", marginTop: 40 }}>
           <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero testar o sistema
+            Quero a minha bilheteria
           </a>
         </div>
       </div>

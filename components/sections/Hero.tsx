@@ -59,7 +59,7 @@ export function Hero() {
 
         <div className="hero-hide-mobile" style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 34 }}>
           <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero testar o sistema
+            Quero pagar menos taxa
           </a>
           <a className="cta-ghost" href="#virada">
             ver como funciona ↓

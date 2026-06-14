@@ -22,7 +22,7 @@ export function FinalCTA() {
 
         <div style={{ marginTop: 32 }}>
           <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={{ padding: "18px 40px", fontSize: 17 }}>
-            Quero testar o sistema
+            Quero minha margem de volta
           </a>
         </div>
 

@@ -59,7 +59,7 @@ export function SocialProof() {
 
         <div style={{ textAlign: "center" }}>
           <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero testar o sistema
+            Quero isso no meu evento
           </a>
         </div>
       </div>
