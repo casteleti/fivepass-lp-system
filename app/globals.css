@@ -84,3 +84,14 @@ img { max-width: 100%; display: block; }
 /* caret do efeito de digitação no H1 */
 .tw-caret { color: var(--accent); font-weight: 300; margin-left: 2px; animation: tw-blink 1s step-end infinite; }
 @keyframes tw-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* tabela comparativa — bloco "Os 5 que voltam" (Outras Plataformas x Fivepass) */
+.cmp { display: grid; grid-template-columns: minmax(64px, .5fr) 1fr 1fr; border: 1px solid var(--sec-border); border-radius: 16px; overflow: hidden; }
+.cmp > div { padding: clamp(12px, 2.4vw, 18px) clamp(11px, 2.2vw, 20px); border-bottom: 1px solid var(--sec-border); display: flex; align-items: center; gap: 8px; font-size: clamp(13px, 1.7vw, 15px); line-height: 1.35; }
+.cmp > div:nth-last-child(-n+3) { border-bottom: none; }
+.cmp .cmp-c3 { background: rgba(0,217,255,.07); color: #fff; font-weight: 600; }
+.cmp .cmp-c2 { color: var(--sec-text-3); }
+.cmp .cmp-label { color: var(--sec-accent); font-weight: 800; text-transform: uppercase; letter-spacing: .04em; font-size: clamp(12px, 1.6vw, 14px); }
+.cmp .cmp-h { font-size: clamp(11px, 1.5vw, 13px); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--sec-text-3); }
+.cmp .cmp-h.cmp-c3 { color: var(--sec-accent); }
+.cmp .cmp-chk { color: var(--success); font-weight: 800; flex-shrink: 0; }

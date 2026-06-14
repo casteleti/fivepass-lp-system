@@ -3,6 +3,7 @@ import { Footer } from "@/components/ui/Footer"
 import { StickyCtaMobile } from "@/components/ui/StickyCtaMobile"
 import { Quiz } from "@/components/ui/Quiz"
 import { Hero } from "@/components/sections/Hero"
+import { HeroPitch } from "@/components/sections/HeroPitch"
 import { Loss } from "@/components/sections/Loss"
 import { PainPoints } from "@/components/sections/PainPoints"
 import { HowItWorks } from "@/components/sections/HowItWorks"
@@ -19,6 +20,7 @@ export default function Home() {
       <Navbar />
       <main>
         {/* 01 · preto  */} <Hero />
+        {/* 01b · mobile */} <HeroPitch />
         {/* 02 · azul   */} <Loss />
         {/* 03 · preto  */} <PainPoints />
         {/* 04 · branco */} <HowItWorks />
