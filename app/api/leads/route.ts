@@ -29,6 +29,18 @@ export async function POST(req: NextRequest) {
   const utmTerm = url.searchParams.get("utm_term") ?? undefined
   const utmContent = url.searchParams.get("utm_content") ?? undefined
 
+  // Envia pro RD Station primeiro (não depende do banco)
+  await sendRdConversion({
+    email: parsed.data.email,
+    name: parsed.data.name,
+    mobilePhone: parsed.data.phone,
+    eventType: parsed.data.eventType,
+    volume: parsed.data.monthlyTicketsEstimate,
+    dor: (body as { dor?: string })?.dor,
+  })
+
+  // Tenta salvar no banco se DATABASE_URL estiver configurada (best-effort)
+  let leadId: number | undefined
   try {
     const lead = await prisma.lead.create({
       data: {
@@ -48,30 +60,12 @@ export async function POST(req: NextRequest) {
         },
       },
     })
-
-    // Envia a conversão pro RD Station (best-effort — não derruba o lead se o RD falhar)
-    await sendRdConversion({
-      email: parsed.data.email,
-      name: parsed.data.name,
-      mobilePhone: parsed.data.phone,
-      eventType: parsed.data.eventType,
-      volume: parsed.data.monthlyTicketsEstimate,
-      dor: (body as { dor?: string })?.dor,
-    })
-
-    const response = { success: true, leadId: lead.id, redirectUrl: `/thank-you?leadId=${lead.id}` }
-    await logApi({ method: "POST", endpoint: "/api/leads", status: 201, requestBody: body, responseBody: response, duration: Date.now() - start, ipAddress: ip, userAgent })
-    return NextResponse.json(response, { status: 201 })
-  } catch (err: unknown) {
-    const isDuplicate = err instanceof Error && err.message.includes("Unique constraint")
-    if (isDuplicate) {
-      const response = { success: false, error: "Este e-mail já está cadastrado." }
-      await logApi({ method: "POST", endpoint: "/api/leads", status: 409, requestBody: body, responseBody: response, duration: Date.now() - start, ipAddress: ip, userAgent })
-      return NextResponse.json(response, { status: 409 })
-    }
-
-    const errMsg = err instanceof Error ? err.message : "Unknown error"
-    await logApi({ method: "POST", endpoint: "/api/leads", status: 500, requestBody: body, errorMessage: errMsg, duration: Date.now() - start, ipAddress: ip, userAgent })
-    return NextResponse.json({ success: false, error: "Erro interno. Tente novamente." }, { status: 500 })
+    leadId = lead.id
+  } catch {
+    // Banco indisponível — lead já foi enviado ao RD Station
   }
+
+  const response = { success: true, leadId, redirectUrl: `/thank-you${leadId ? `?leadId=${leadId}` : ""}` }
+  await logApi({ method: "POST", endpoint: "/api/leads", status: 201, requestBody: body, responseBody: response, duration: Date.now() - start, ipAddress: ip, userAgent }).catch(() => {})
+  return NextResponse.json(response, { status: 201 })
 }
