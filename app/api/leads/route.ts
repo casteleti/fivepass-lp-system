@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
   })
 
   // Tenta salvar no banco se DATABASE_URL estiver configurada (best-effort)
-  let leadId: number | undefined
+  let leadId: string | undefined
   try {
     const lead = await prisma.lead.create({
       data: {
