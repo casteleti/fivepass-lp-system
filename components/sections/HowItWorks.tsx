@@ -1,7 +1,7 @@
 import { whatsappUrl } from "@/lib/whatsapp"
 
 const points = [
-  { i: "⚡", t: "O dinheiro não passa pela nossa conta", d: "Cai direto na sua, na hora." },
+  { i: "⚡", t: "O dinheiro não passa pela nossa conta", d: "Cai direto na sua, na hora da venda — antes do evento." },
   { i: "🏷️", t: "Ingresso, site e comunicação com a sua marca", d: "O cliente compra na sua casa." },
   { i: "📊", t: "Os dados são seus", d: "Prontos pra remarketing no próximo evento." },
   { i: "📲", t: "Check-in por QR Code e catraca facial", d: "Entrada rápida, mesmo no pico." },

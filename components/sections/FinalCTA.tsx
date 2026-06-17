@@ -12,7 +12,7 @@ export function FinalCTA() {
     >
       <div className="sec-in" style={{ maxWidth: 680, textAlign: "center" }}>
         <h2 className="h2">
-          Seu evento terminou. Seu dinheiro já está na <span className="accent">sua conta</span>.
+          Vendeu o ingresso, recebeu. O dinheiro cai <span className="accent">antes do evento</span> e paga os fornecedores.
         </h2>
 
         <p className="lead" style={{ marginTop: 20 }}>

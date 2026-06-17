@@ -8,6 +8,7 @@ import { Loss } from "@/components/sections/Loss"
 import { PainPoints } from "@/components/sections/PainPoints"
 import { HowItWorks } from "@/components/sections/HowItWorks"
 import { Benefits } from "@/components/sections/Benefits"
+import { Plataforma } from "@/components/sections/Plataforma"
 import { SocialProof } from "@/components/sections/SocialProof"
 import { FAQ } from "@/components/sections/FAQ"
 import { UseCases } from "@/components/sections/UseCases"
@@ -25,6 +26,7 @@ export default function Home() {
         {/* 03 · preto  */} <PainPoints />
         {/* 04 · branco */} <HowItWorks />
         {/* 05 · azul   */} <Benefits />
+        {/* 05b· branco */} <Plataforma />
         {/* 06 · preto  */} <SocialProof />
         {/* 07 · branco */} <FAQ />
         {/* 08 · azul   */} <UseCases />

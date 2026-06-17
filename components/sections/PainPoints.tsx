@@ -1,6 +1,6 @@
 const pains = [
   { t: "A taxa", d: "10% a 15% por ingresso, que ainda encarece o ingresso pro seu público." },
-  { t: "O seu dinheiro", d: "preso por semanas, travando seu caixa justo quando você mais precisa." },
+  { t: "O seu dinheiro", d: "preso por semanas. Você precisa pagar fornecedor antes do evento — e o caixa não chega." },
   { t: "A sua marca", d: "o checkout tem a cara dele, com o concorrente aparecendo do lado." },
   { t: "O seu cliente", d: "vira lead dele. Sem dados, você recomeça do zero a cada evento." },
 ]

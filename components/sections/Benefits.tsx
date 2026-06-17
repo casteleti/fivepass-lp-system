@@ -2,7 +2,7 @@ import { Fragment } from "react"
 
 const rows = [
   { k: "Lucro", b: "taxa de 10% a 15%", a: "3% a 5% — a menor do mercado" },
-  { k: "Caixa", b: "preso por semanas", a: "na hora, na sua conta" },
+  { k: "Caixa", b: "preso por semanas", a: "no seu caixa antes do evento" },
   { k: "Marca", b: "checkout com a cara deles", a: "ingresso e site com a sua" },
   { k: "Dados", b: "seu cliente é lead deles", a: "base 100% sua" },
   { k: "Controle", b: "preço e regra ditados", a: "a operação é sua" },
