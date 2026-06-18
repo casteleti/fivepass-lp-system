@@ -1,4 +1,4 @@
-# Tracking — GA4 / GTM / Meta Pixel
+# Tracking — GA4 / GTM / Meta Pixel / Microsoft Clarity
 
 Tracking centralizado em [`lib/analytics.ts`](../lib/analytics.ts) (função `track`) e
 disparado a partir de [`components/ui/Analytics.tsx`](../components/ui/Analytics.tsx)
@@ -19,6 +19,28 @@ adicionais específicos de estado interno em
 - `NEXT_PUBLIC_META_PIXEL_ID` está vazio em `.env.local`/`.env.example` — o snippet do
   Pixel em `app/layout.tsx` só carrega se essa env tiver valor, então está **inativo**
   de propósito (Pixel já vem pelo GTM).
+- Todo evento também vai para `Clarity.event(event)` (Microsoft Clarity, pacote oficial
+  `@microsoft/clarity`), via [`components/Analytics/Clarity.tsx`](../components/Analytics/Clarity.tsx).
+  Clarity **não recebe os parâmetros** do evento (a API do pacote só aceita o nome do
+  evento) — use `section_name`/`button_name`/etc. apenas nos relatórios de GA4/GTM.
+
+## Microsoft Clarity
+
+- Client Component dedicado em `components/Analytics/Clarity.tsx`, montado no
+  `RootLayout` (que continua Server Component).
+- Inicializa via `import("@microsoft/clarity")` dinâmico dentro de um `useEffect`,
+  rodando **só no navegador** e **só em produção** (`NODE_ENV === "production"`).
+  Em dev, o Clarity não inicializa — evita poluir sessões reais com testes locais.
+- Só inicializa se `NEXT_PUBLIC_CLARITY_ID` estiver setado (validação antes do
+  `clarity.init`). Variável placeholder em `.env.example`/`.env.local`, **nunca
+  hardcoded**.
+- `setClarityReady()` (`lib/analytics.ts`) guarda a referência do client de Clarity
+  depois do `init` resolver; `track()` chama `clarityApi?.event(event)` em todo
+  disparo — se o Clarity ainda não inicializou (dev, ID vazio, ou import ainda
+  pendente), a chamada é um no-op silencioso.
+- Proteção contra múltiplas inicializações: o `useEffect` roda 1x por mount do
+  `RootLayout` (que não remonta em navegação client-side do App Router) e usa uma
+  flag `cancelled` no cleanup para não chamar `setClarityReady` após unmount.
 
 ## Sections (`section_name`)
 
