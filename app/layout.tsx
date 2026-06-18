@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Saira_Condensed } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
 import { Analytics } from "@/components/ui/Analytics"
-import { Clarity } from "@/components/Analytics/Clarity"
+import { ClarityProvider } from "@/components/Analytics/ClarityProvider"
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] })
@@ -112,7 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Tracking de seções / CTAs / scroll / tempo (GA4 + Meta Pixel via GTM) */}
         <Analytics />
         {/* Microsoft Clarity — Client Component dedicado, init só em produção */}
-        <Clarity />
+        <ClarityProvider />
       </body>
     </html>
   )
