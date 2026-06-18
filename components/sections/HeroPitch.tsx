@@ -1,5 +1,3 @@
-import { whatsappUrl } from "@/lib/whatsapp"
-
 const proofs = ["3% a 5% de taxa", "Dinheiro na hora, na sua conta", "Sua marca, seu domínio", "Centenas de eventos"]
 
 // Pitch da Hero — aparece APENAS no mobile (no desktop a Hero já mostra tudo).
@@ -16,8 +14,8 @@ export function HeroPitch() {
         </p>
 
         <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 28 }}>
-          <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero pagar menos taxa
+          <a className="cta" href="#cta">
+            Quero testar o Fivepass
           </a>
           <a className="cta-ghost" href="#virada">
             ver como funciona ↓

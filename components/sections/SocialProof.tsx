@@ -1,5 +1,3 @@
-import { whatsappUrl } from "@/lib/whatsapp"
-
 const trust = [
   "Centenas de grandes eventos",
   "Estabilidade no pico de venda",
@@ -42,7 +40,7 @@ export function SocialProof() {
               poster="/videos/depoimento-poster.jpg"
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             >
-              <source src="/videos/depoimento.mp4" type="video/mp4" />
+              <source src="/videos/depoimento-compress.mp4" type="video/mp4" />
               Seu navegador não suporta vídeo.
             </video>
           </div>
@@ -58,8 +56,8 @@ export function SocialProof() {
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero isso no meu evento
+          <a className="cta" href="#cta">
+            Quero testar o Fivepass
           </a>
         </div>
       </div>

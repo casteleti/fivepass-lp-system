@@ -1,5 +1,3 @@
-import { whatsappUrl } from "@/lib/whatsapp"
-
 export function Footer() {
   return (
     <footer style={{ padding: "56px 24px", background: "var(--bg-darker)", borderTop: "1px solid var(--border)", textAlign: "center" }}>
@@ -16,12 +14,10 @@ export function Footer() {
           Mais eventos. Menos taxas.
         </p>
         <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#cta"
           style={{ color: "var(--accent)", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}
         >
-          Quero testar o sistema →
+          Quero testar o Fivepass →
         </a>
         <p style={{ color: "var(--text-tertiary)", fontSize: "12px", marginTop: "28px" }}>
           © 2026 Fivepass · Plataforma de ticketing white-label

@@ -44,3 +44,7 @@ dev.err
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# notas de trabalho (Word) — não versionar
+*.docx
+~$*

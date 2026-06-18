@@ -14,7 +14,7 @@ export function Benefits() {
       <div className="sec-in" style={{ maxWidth: 880 }}>
         <div className="sec-head">
           <span className="eyebrow">Antes e depois</span>
-          <h2 className="h2">Os 5 que o marketplace tira — e a Fivepass devolve.</h2>
+          <h2 className="h2">O que os outros sistemas tiram, a Fivepass retorna!</h2>
         </div>
 
         <div className="cmp">

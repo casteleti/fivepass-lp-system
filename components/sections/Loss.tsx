@@ -1,5 +1,3 @@
-import { whatsappUrl } from "@/lib/whatsapp"
-
 export function Loss() {
   return (
     <section id="conta" className="sec theme-blue">
@@ -24,8 +22,8 @@ export function Loss() {
         </p>
 
         <div style={{ marginTop: 34 }}>
-          <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero parar de perder dinheiro
+          <a className="cta" href="#cta">
+            Quero testar o Fivepass
           </a>
         </div>
       </div>

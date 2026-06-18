@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { WHATSAPP_PHONE } from "@/lib/whatsapp"
 
 declare global {
   interface Window {
@@ -19,6 +18,7 @@ const STEPS: Step[] = [
     options: [
       { label: "Show / Festival", value: "show", emoji: "🎤" },
       { label: "Festa / Balada", value: "festa", emoji: "🎉" },
+      { label: "Casa de Eventos / Ingresso na Entrada", value: "casa_eventos", emoji: "🏛️" },
       { label: "Conferência / Congresso", value: "conferencia", emoji: "🎫" },
       { label: "Outro", value: "outro", emoji: "✨" },
     ],
@@ -47,24 +47,25 @@ const STEPS: Step[] = [
 ]
 
 const TOTAL = STEPS.length + 1 // + etapa de contato
-// Mensagem pronta que abre no WhatsApp ao concluir o quiz (o cliente só envia)
-const WA_MSG = "Olá, acabo de responder o formulário. Quero saber mais sobre o Fivepass."
-const WA_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WA_MSG)}`
+// Ao concluir, o lead é levado pra Landing Page (veio direto do anúncio, ainda não a viu).
+const LP_URL = "/"
 
 function push(event: string, extra: Record<string, unknown> = {}) {
   if (typeof window !== "undefined") window.dataLayer?.push({ event, ...extra })
 }
 
-export function Quiz() {
-  const [open, setOpen] = useState(false)
+export function Quiz({ standalone = false }: { standalone?: boolean }) {
+  const [open, setOpen] = useState(standalone)
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | number>>({})
   const [form, setForm] = useState({ name: "", whatsapp: "", email: "" })
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [err, setErr] = useState("")
 
-  // Abre o quiz ao clicar em qualquer CTA de WhatsApp (menos os de dentro do modal)
+  // Abre o quiz ao clicar em qualquer CTA de WhatsApp (menos os de dentro do modal).
+  // No modo standalone (/quiz) o quiz já nasce aberto — sem gatilho de clique.
   useEffect(() => {
+    if (standalone) return
     const onClick = (e: MouseEvent) => {
       const a = (e.target as HTMLElement)?.closest?.('a[href*="wa.me"]') as HTMLElement | null
       if (a && !a.closest(".quiz-modal")) {
@@ -75,19 +76,19 @@ export function Quiz() {
     }
     document.addEventListener("click", onClick)
     return () => document.removeEventListener("click", onClick)
-  }, [])
+  }, [standalone])
 
   // Trava scroll + Esc fecha
   useEffect(() => {
     if (!open) return
     document.body.style.overflow = "hidden"
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false)
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape" && !standalone) setOpen(false) }
     window.addEventListener("keydown", onKey)
     return () => {
       document.body.style.overflow = ""
       window.removeEventListener("keydown", onKey)
     }
-  }, [open])
+  }, [open, standalone])
 
   if (!open) return null
 
@@ -125,10 +126,10 @@ export function Quiz() {
       }
       push("lead_quiz_complete", { eventType: answers.eventType, volume: answers.volume, dor: answers.dor })
       setStatus("success")
-      // Abre o WhatsApp com a mensagem pronta. Navegação direta = confiável no mobile (não é bloqueada como popup).
+      // Leva pra Landing Page conhecer a Fivepass (o lead veio do anúncio direto pro quiz).
       window.setTimeout(() => {
-        window.location.href = WA_URL
-      }, 900)
+        window.location.href = LP_URL
+      }, 3000)
     } catch {
       setStatus("error")
       setErr("Falha de conexão. Tente de novo.")
@@ -185,9 +186,13 @@ export function Quiz() {
         <div style={{ flex: 1, height: 5, borderRadius: 3, background: "rgba(255,255,255,.12)", overflow: "hidden" }}>
           <div style={{ width: `${progress}%`, height: "100%", background: "var(--accent)", borderRadius: 3, transition: "width .45s cubic-bezier(.4,0,.2,1)" }} />
         </div>
-        <button onClick={() => setOpen(false)} aria-label="Fechar" style={iconBtn}>
-          ✕
-        </button>
+        {standalone ? (
+          <span style={{ width: 36 }} />
+        ) : (
+          <button onClick={() => setOpen(false)} aria-label="Fechar" style={iconBtn}>
+            ✕
+          </button>
+        )}
       </div>
 
       {/* Conteúdo */}
@@ -198,20 +203,17 @@ export function Quiz() {
               <div style={{ fontSize: 56, marginBottom: 14 }}>🎉</div>
               <h2 style={{ fontSize: "clamp(26px,7vw,34px)", fontWeight: 800, lineHeight: 1.15 }}>Recebemos!</h2>
               <p style={{ fontSize: 16, color: "#bcceea", lineHeight: 1.6, marginTop: 14 }}>
-                Estamos abrindo o WhatsApp pra você <strong style={{ color: "#fff" }}>só enviar a mensagem</strong> e falar com a gente.
+                Agora conheça a <strong style={{ color: "#fff" }}>Fivepass</strong> por dentro — estamos te levando pra página.
               </p>
-              <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ ...primaryBtn, marginTop: 28 }}>
-                Abrir o WhatsApp
+              <a href={LP_URL} style={{ ...primaryBtn, marginTop: 28 }}>
+                Conhecer a Fivepass
               </a>
-              <button onClick={() => setOpen(false)} style={{ ...textBtn, marginTop: 14 }}>
-                Fechar
-              </button>
             </div>
           ) : isContact ? (
             <div className="quiz-step" key="contact">
               <p style={stepTag}>Última etapa</p>
               <h2 style={qTitle}>Pra onde enviamos seu diagnóstico?</h2>
-              <p style={{ fontSize: 15, color: "#bcceea", marginTop: 8 }}>Sem spam. Atendimento humano, resposta rápida.</p>
+              <p style={{ fontSize: 15, color: "#bcceea", marginTop: 8 }}>Vamos estudar o modelo do seu evento e voltar com a solução que aumenta a sua margem.</p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 26 }}>
                 <input
@@ -247,7 +249,7 @@ export function Quiz() {
               {err && <p style={{ color: "#ff7a88", fontSize: 14, marginTop: 14 }}>{err}</p>}
 
               <button onClick={submit} disabled={status === "loading"} style={{ ...primaryBtn, marginTop: 20, opacity: status === "loading" ? 0.7 : 1 }}>
-                {status === "loading" ? "Enviando..." : "Quero meu diagnóstico →"}
+                {status === "loading" ? "Enviando..." : "Enviar"}
               </button>
               <p style={{ fontSize: 12, color: "#8ba6c8", textAlign: "center", marginTop: 14 }}>
                 Seus dados são tratados com segurança (LGPD).
@@ -351,15 +353,4 @@ const primaryBtn: React.CSSProperties = {
   textDecoration: "none",
   cursor: "pointer",
   boxShadow: "0 10px 30px rgba(0,217,255,.28)",
-}
-
-const textBtn: React.CSSProperties = {
-  display: "block",
-  width: "100%",
-  padding: "12px",
-  background: "transparent",
-  color: "#8ba6c8",
-  border: "none",
-  fontSize: 14,
-  cursor: "pointer",
 }

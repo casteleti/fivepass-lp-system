@@ -1,5 +1,3 @@
-import { whatsappUrl } from "@/lib/whatsapp"
-
 export function Urgency() {
   return (
     <section id="agora" className="sec theme-black">
@@ -16,8 +14,8 @@ export function Urgency() {
         </p>
 
         <div style={{ marginTop: 32 }}>
-          <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero começar pelo próximo evento
+          <a className="cta" href="#cta">
+            Quero testar o Fivepass
           </a>
         </div>
       </div>

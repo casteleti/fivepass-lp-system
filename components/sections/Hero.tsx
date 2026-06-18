@@ -1,4 +1,3 @@
-import { whatsappUrl } from "@/lib/whatsapp"
 import { TypewriterHeadline } from "@/components/ui/TypewriterHeadline"
 
 const proofs = ["3% a 5% de taxa", "Dinheiro na hora, na sua conta", "Sua marca, seu domínio", "Centenas de eventos"]
@@ -25,11 +24,11 @@ export function Hero() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="none"
         poster="/videos/hero-mobile-poster.jpg"
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
       >
-        <source src="/videos/hero-mobile.mp4" type="video/mp4" />
+        <source src="/videos/hero-mobile-compress.mp4" type="video/mp4" />
       </video>
       <div
         className="hero-bg-overlay"
@@ -58,8 +57,8 @@ export function Hero() {
         </p>
 
         <div className="hero-hide-mobile" style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 34 }}>
-          <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero pagar menos taxa
+          <a className="cta" href="#cta">
+            Quero testar o Fivepass
           </a>
           <a className="cta-ghost" href="#virada">
             ver como funciona ↓

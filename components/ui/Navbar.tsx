@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { whatsappUrl } from "@/lib/whatsapp"
 
 export function Navbar() {
   // sobre o hero (topo) vs. rolado (perto do bloco 2) — só muda o visual no mobile
@@ -68,9 +67,7 @@ export function Navbar() {
         </a>
 
         <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#cta"
           className="nav-cta"
           style={{
             padding: "10px 18px",
@@ -83,7 +80,7 @@ export function Navbar() {
             whiteSpace: "nowrap",
           }}
         >
-          Quero testar o sistema
+          Quero testar o Fivepass
         </a>
       </div>
     </header>

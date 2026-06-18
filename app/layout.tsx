@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono, Saira_Condensed } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
+import { Analytics } from "@/components/ui/Analytics"
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] })
@@ -10,6 +11,7 @@ const sairaCondensed = Saira_Condensed({ variable: "--font-condensed", subsets: 
 // IDs do Google (públicos). Env permite sobrescrever por ambiente; fallback = IDs reais.
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-MTSFXTQ5"
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || "G-VGGKMRYFRG"
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || ""
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fivepass.daksa.ia.br"
 const TITLE = "Fivepass — A bilheteria que mais dá margem pro seu evento"
@@ -93,6 +95,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script id="ga4" strategy="afterInteractive">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA4_ID}');`}
         </Script>
+
+        {/* Meta Pixel — carrega só se o ID estiver no env. if(f.fbq)return evita duplicar se o GTM já carregar o Pixel. */}
+        {META_PIXEL_ID && (
+          <>
+            <Script id="meta-pixel" strategy="afterInteractive">
+              {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`}
+            </Script>
+            <noscript>
+              <img height="1" width="1" style={{ display: "none" }} alt="" src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`} />
+            </noscript>
+          </>
+        )}
+
+        {/* Tracking de seções / CTAs / scroll / tempo (GA4 + Meta Pixel) */}
+        <Analytics />
       </body>
     </html>
   )

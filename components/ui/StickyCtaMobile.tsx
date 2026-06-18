@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { whatsappUrl } from "@/lib/whatsapp"
 
 export function StickyCtaMobile() {
   const [visible, setVisible] = useState(false)
@@ -31,9 +30,7 @@ export function StickyCtaMobile() {
       }}
     >
       <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+        href="#cta"
         style={{
           display: "block",
           width: "100%",
@@ -48,7 +45,7 @@ export function StickyCtaMobile() {
           boxShadow: "0 0 24px #00d9ff44",
         }}
       >
-        Quero testar o sistema
+        Quero testar o Fivepass
       </a>
       <style>{`
         @media (max-width: 768px) {

@@ -18,6 +18,7 @@ const CONVERSION_IDENTIFIER = "fivepass-lp-quiz"
 const EVENT_LABEL: Record<string, string> = {
   show: "Show / Festival",
   festa: "Festa / Balada",
+  casa_eventos: "Casa de Eventos / Ingresso na Entrada",
   conferencia: "Conferência / Congresso",
   outro: "Outro",
 }

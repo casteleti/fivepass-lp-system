@@ -1,5 +1,3 @@
-import { whatsappUrl } from "@/lib/whatsapp"
-
 /* Sites de vendas (white-label) — sem citar nome de cliente. */
 const sites = [
   { src: "/clientes/clientes-01.jpeg", alt: "Site de vendas de eventos com a marca do produtor" },
@@ -45,7 +43,7 @@ export function Plataforma() {
               <div style={{ background: "#0e1626", borderRadius: 30, padding: 7, boxShadow: "0 22px 50px rgba(14,22,38,.20)" }}>
                 <div style={{ borderRadius: 24, overflow: "hidden", aspectRatio: "739 / 1600", background: "#000" }}>
                   <img
-                    src={s.src} alt={s.alt} width={739} height={1600} loading="lazy"
+                    src={s.src} alt={s.alt} width={739} height={1600} loading="lazy" decoding="async"
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
                   />
                 </div>
@@ -75,14 +73,14 @@ export function Plataforma() {
                   painel.fivepass.com.br
                 </span>
               </div>
-              <img src={t.src} alt={t.alt} width={t.w} height={t.h} loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+              <img src={t.src} alt={t.alt} width={t.w} height={t.h} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
           ))}
         </div>
 
         <div style={{ textAlign: "center", marginTop: "clamp(40px,6vw,56px)" }}>
-          <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero esse controle no meu evento
+          <a className="cta" href="#cta">
+            Quero testar o Fivepass
           </a>
         </div>
       </div>

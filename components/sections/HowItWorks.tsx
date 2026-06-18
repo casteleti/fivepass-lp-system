@@ -1,5 +1,3 @@
-import { whatsappUrl } from "@/lib/whatsapp"
-
 const points = [
   { i: "⚡", t: "O dinheiro não passa pela nossa conta", d: "Cai direto na sua, na hora da venda — antes do evento." },
   { i: "🏷️", t: "Ingresso, site e comunicação com a sua marca", d: "O cliente compra na sua casa." },
@@ -33,8 +31,8 @@ export function HowItWorks() {
         </div>
 
         <div style={{ textAlign: "center", marginTop: 40 }}>
-          <a className="cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            Quero a minha bilheteria
+          <a className="cta" href="#cta">
+            Quero testar o Fivepass
           </a>
         </div>
       </div>

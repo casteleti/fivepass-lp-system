@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/ui/Navbar"
 import { Footer } from "@/components/ui/Footer"
 import { StickyCtaMobile } from "@/components/ui/StickyCtaMobile"
-import { Quiz } from "@/components/ui/Quiz"
 import { Hero } from "@/components/sections/Hero"
 import { HeroPitch } from "@/components/sections/HeroPitch"
 import { Loss } from "@/components/sections/Loss"
@@ -35,7 +34,6 @@ export default function Home() {
       </main>
       <Footer />
       <StickyCtaMobile />
-      <Quiz />
     </>
   )
 }

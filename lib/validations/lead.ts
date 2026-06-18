@@ -5,7 +5,7 @@ export const leadSchema = z.object({
   email: z.string().email(),
   phone: z.string().regex(/^\d{10,15}$/).optional(),
   company: z.string().max(200).optional(),
-  eventType: z.enum(["show", "festa", "conferencia", "outro"]).optional(),
+  eventType: z.enum(["show", "festa", "casa_eventos", "conferencia", "outro"]).optional(),
   monthlyTicketsEstimate: z.number().int().min(0).max(1000000).optional(),
   landingVariant: z.string().default("default"),
 })
