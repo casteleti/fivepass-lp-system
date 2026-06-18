@@ -1,12 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-
-declare global {
-  interface Window {
-    dataLayer?: Record<string, unknown>[]
-  }
-}
+import { track } from "@/lib/analytics"
 
 type Choice = { label: string; value: string | number; emoji?: string }
 type Step = { key: "eventType" | "volume" | "dor"; title: string; subtitle?: string; options: Choice[] }
@@ -50,10 +45,6 @@ const TOTAL = STEPS.length + 1 // + etapa de contato
 // Ao concluir, o lead é levado pra Landing Page (veio direto do anúncio, ainda não a viu).
 const LP_URL = "/"
 
-function push(event: string, extra: Record<string, unknown> = {}) {
-  if (typeof window !== "undefined") window.dataLayer?.push({ event, ...extra })
-}
-
 export function Quiz({ standalone = false }: { standalone?: boolean }) {
   const [open, setOpen] = useState(standalone)
   const [step, setStep] = useState(0)
@@ -71,11 +62,16 @@ export function Quiz({ standalone = false }: { standalone?: boolean }) {
       if (a && !a.closest(".quiz-modal")) {
         e.preventDefault()
         setOpen(true)
-        push("lead_quiz_start")
+        track("quiz_start", { form_type: "quiz", trigger: "wa_cta" })
       }
     }
     document.addEventListener("click", onClick)
     return () => document.removeEventListener("click", onClick)
+  }, [standalone])
+
+  // No modo standalone (/quiz) não há clique de gatilho — o quiz_start dispara no mount.
+  useEffect(() => {
+    if (standalone) track("quiz_start", { form_type: "quiz", trigger: "standalone_page" })
   }, [standalone])
 
   // Trava scroll + Esc fecha
@@ -93,7 +89,12 @@ export function Quiz({ standalone = false }: { standalone?: boolean }) {
   if (!open) return null
 
   const pick = (key: string, value: string | number) => {
-    setAnswers((a) => ({ ...a, [key]: value }))
+    const next = { ...answers, [key]: value }
+    setAnswers(next)
+    if (step === STEPS.length - 1) {
+      // última pergunta respondida → quiz "completo", falta só a etapa de contato.
+      track("quiz_complete", { form_type: "quiz", eventType: next.eventType, volume: next.volume, dor: next.dor })
+    }
     window.setTimeout(() => setStep((s) => s + 1), 170)
   }
 
@@ -104,6 +105,8 @@ export function Quiz({ standalone = false }: { standalone?: boolean }) {
     if (phone.length < 10) return setErr("WhatsApp inválido (com DDD).")
     setErr("")
     setStatus("loading")
+    // quiz_submit = tentativa de envio (equivalente ao form_submit do form principal).
+    track("quiz_submit", { form_type: "quiz", eventType: answers.eventType, volume: answers.volume, dor: answers.dor })
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
@@ -124,7 +127,7 @@ export function Quiz({ standalone = false }: { standalone?: boolean }) {
         setErr(d.error || "Erro ao enviar. Tente de novo.")
         return
       }
-      push("lead_quiz_complete", { eventType: answers.eventType, volume: answers.volume, dor: answers.dor })
+      track("lead_success", { form_type: "quiz", eventType: answers.eventType, volume: answers.volume, dor: answers.dor })
       setStatus("success")
       // Leva pra Landing Page conhecer a Fivepass (o lead veio do anúncio direto pro quiz).
       window.setTimeout(() => {

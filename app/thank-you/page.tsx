@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation"
 import { Suspense, useState } from "react"
+import { track } from "@/lib/analytics"
 
 function ThankYouContent() {
   const params = useSearchParams()
@@ -18,7 +19,10 @@ function ThankYouContent() {
         body: JSON.stringify({ leadId }),
       })
       const data = await res.json()
-      if (data.whatsappUrl) window.open(data.whatsappUrl, "_blank")
+      if (data.whatsappUrl) {
+        track("whatsapp_click", { section_name: "thank_you", button_name: "Chamar no WhatsApp", destination: "whatsapp" })
+        window.open(data.whatsappUrl, "_blank")
+      }
     } finally {
       setWhatsappLoading(false)
     }

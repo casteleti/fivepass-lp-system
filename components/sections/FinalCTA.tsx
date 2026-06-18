@@ -1,17 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import { track } from "@/lib/analytics"
 
 const INSTAGRAM_URL = "https://www.instagram.com/five.pass/"
-
-declare global {
-  interface Window {
-    dataLayer?: Record<string, unknown>[]
-  }
-}
-function push(event: string, extra: Record<string, unknown> = {}) {
-  if (typeof window !== "undefined") window.dataLayer?.push({ event, ...extra })
-}
 
 export function FinalCTA() {
   const [form, setForm] = useState({ name: "", phone: "", email: "" })
@@ -26,10 +18,10 @@ export function FinalCTA() {
     if (phone.length < 10) return setErr("WhatsApp inválido (com DDD).")
     setErr("")
     setStatus("loading")
-    push("lead_form_start", { source: "lp-final" })
+    // form_submit (tentativa) já é capturado pelo listener global em Analytics.tsx via onSubmit do <form>.
     try {
       // Coleta o lead (vai pro RD Station via /api/leads). Best-effort.
-      await fetch("/api/leads", {
+      const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -39,10 +31,10 @@ export function FinalCTA() {
           landingVariant: "lp-final",
         }),
       })
+      if (res.ok || res.status === 409) track("lead_success", { form_type: "main_form" })
     } catch {
       // segue pro Instagram mesmo se a rede falhar
     }
-    push("lead_form_complete", { source: "lp-final" })
     // pisca a tela e abre o Instagram do Fivepass
     setStatus("flash")
     window.setTimeout(() => {
